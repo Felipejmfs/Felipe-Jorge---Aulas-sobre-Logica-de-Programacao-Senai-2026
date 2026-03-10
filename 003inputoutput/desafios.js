@@ -24,7 +24,7 @@
 
 // → Seu código aqui:
 
-// const lerTeclado = require('readline-sync')
+const lerTeclado = require('readline-sync')
 
 // const nomeUsuario = lerTeclado.question("Digite seu nome: ")
 // const idadeUsuario = lerTeclado.questionInt("Digite sua idade: ")
@@ -68,34 +68,33 @@
 // → Seu código aqui:
 
 
-const nomeUsuario = lerTeclado.question("Digite seu nome: ")
-const idadeUsuario = lerTeclado.questionInt("Digite sua idade: ")
-const cidadeUsuario = lerTeclado.question("Digite a sua cidade: ")
+// const nomeUsuario = lerTeclado.question("Digite seu nome: ")
+// const idadeUsuario = lerTeclado.questionInt("Digite sua idade: ")
+// const cidadeUsuario = lerTeclado.question("Digite a sua cidade: ")
 
-let usuario = {
-    nome: nomeUsuario,
-    idade: idadeUsuario,
-    cidade: cidadeUsuario
-}
+// let usuario = {
+//     nome: nomeUsuario,
+//     idade: idadeUsuario,
+//     cidade: cidadeUsuario
+// }
 
-const nomeUsuario2 = lerTeclado.question("Digite seu nome: ")
-const idadeUsuario2 = lerTeclado.questionInt("Digite sua idade: ")
-const cidadeUsuario2 = lerTeclado.question("Digite a sua cidade: ")
+// const nomeUsuario2 = lerTeclado.question("Digite seu nome: ")
+// const idadeUsuario2 = lerTeclado.questionInt("Digite sua idade: ")
+// const cidadeUsuario2 = lerTeclado.question("Digite a sua cidade: ")
 
-let usuario2 = {
-    nome: nomeUsuario2,
-    idade: idadeUsuario2,
-    cidade: cidadeUsuario2
-}
+// let usuario2 = {
+//     nome: nomeUsuario2,
+//     idade: idadeUsuario2,
+//     cidade: cidadeUsuario2
+// }
 
-let amigos = [usuario, usuario2]
-console.table(amigos)
-console.log(amigos[1].nome, amigos[1].idade)
-console.log(amigos[0].endereco)
+// let amigos = [usuario, usuario2]
+// console.table(amigos)
+// console.log(amigos[1].nome, amigos[1].idade)
+// console.log(amigos[0].cidade)
 
 
 
-console.log("_______________________________");
 
 
 // ------------------------------------------------------------
@@ -115,8 +114,73 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+// console.info("Você vai montar um pedido")
 
-console.log("_______________________________");
+// let entradaMenu = (`
+// ===========================
+// |       MENU ENTRADA      |
+// ===========================
+// 1 - Batata frita / 600g / R$30
+// 2 - Espetinho / 1und / R$15
+// 3 - Mandioca frita / 1kg / 40R$
+// 4 - Pão / 1und / 1R$
+// ===========================
+// | Digite a Opção desejada |
+// ===========================`)
+
+// console.log(entradaMenu)
+// const pedidoEntrada = lerTeclado.question("Escolha uma entrada: ")
+
+// let principalMenu = (`
+// ===========================
+// |    PRATOS PRINCIPAIS    |
+// ===========================
+// 1 - Parmegiana / Pf / R$30
+// 2 - Strogonoff / Pf / R$30
+// 3 - Feijão tropeiro / Pf / 40R$
+// 4 - Churrasco / Pf / 40R$
+// ===========================
+// | Digite a Opção desejada |
+// ===========================`)
+// console.log(principalMenu)
+// let pedidoPrincipal = lerTeclado.question("Escolha um prato principal: ")
+
+// let sobremesasMenu = (`
+// =========================2
+// |        SOBREMESAS      2
+// =========================2
+// 1 - Bolo / Kg / R$30
+// 2 - Torta de bolacha / Kg2
+// 3 - Bala / Und / 40R$
+// 4 - Chocolate / Kg / 40R2
+// ===========================
+// | Digite a Opção desejada |
+// ===========================`)
+// console.log(sobremesasMenu)
+// let pedidoSobremasa = lerTeclado.question("Escolha uma sobremesa: ")
+
+// let bebidasMenu = (`
+// ===========================
+// |         Bebidas         |
+// ===========================
+// 1 - Água / und / R$30
+// 2 - Suco / und / R$30
+// 3 - Refri / Und / 40R$
+// 4 - Cerveja / Und / 40R$
+// ===========================
+// | Digite a Opção desejada |
+// ===========================`)
+// console.log(bebidasMenu)
+// let pedidoBebida = lerTeclado.question("Escolha uma bebida: ")
+// let pedidoBebida2 = lerTeclado.question("Escolha mais uma bebida: ")
+// let pedido = {
+//     entrada: pedidoEntrada,
+//     pratoPrincipal: pedidoPrincipal,
+//     sobremesas: pedidoSobremasa,
+//     listaBebidas: [pedidoBebida, pedidoBebida2]
+// }
+// console.table(pedido);
+// console.log(`Seu pedido: Entrada: ${pedidoEntrada}, Prato Principal: ${pedidoPrincipal}, Sobremesa: ${pedidoSobremasa}, Bebida 1: ${pedidoBebida}, Bebida 2: ${pedidoBebida2}. Bom apetite!`)
 
 
 // ------------------------------------------------------------
@@ -131,8 +195,17 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+// let perfil = {
+//     apelido: lerTeclado.question("Digite o seu apelido: "),
+//     jogoFavorito: lerTeclado.question("Digite o seu jogo favorito: "),
+//     horasTotaisJogadas: lerTeclado.questionInt("Digite suas horas totais jogadas: "),
+//     jogaEmTime: lerTeclado.keyInYN("Você joga em time? ")
+// }
+// console.table(perfil)
 
-console.log("_______________________________");
+// console.warn("Lembre-se que jogar não é problema, o problema é colocar o jogo como prioridade.")
+
+
 
 
 // ------------------------------------------------------------
@@ -149,5 +222,21 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+const pessoa = {
+    nome: lerTeclado.question("Digite seu nome: "),
+    cidadeFav: lerTeclado.question("Digite sua cidade favorita: ")
+}
+const pessoa2 = {
+    nome: lerTeclado.question("Digite seu nome: "),
+    cidadeFav: lerTeclado.question("Digite sua cidade favorita: ")
+}
+const pessoa3 = {
+    nome: lerTeclado.question("Digite seu nome: "),
+    cidadeFav: lerTeclado.question("Digite sua cidade favorita: ")
+}
+let viajantes = [pessoa, pessoa2, pessoa3]
 
-console.log("_______________________________");
+console.table(viajantes)
+console.info(`Há ${viajantes.length} viajantes nessa viagem`)
+console.log(viajantes[1].cidadeFav)
+console.log(viajantes[0].nome)

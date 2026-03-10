@@ -57,17 +57,16 @@ let lerTeclado = require('readline-sync')
 
 // → Seu código aqui:
 
-// const usuarioNome = lerTeclado.question("Digite o seu nome: ")
-// const usuarioIdade = lerTeclado.questionInt("Digite o sua idade: ")
-// const usuarioCidade = lerTeclado.question("Digite o sua cidade: ")
+const usuarioNome = lerTeclado.question("Digite o seu nome: ")
+const usuarioIdade = lerTeclado.questionInt("Digite o sua idade: ")
+const usuarioCidade = lerTeclado.question("Digite o sua cidade: ")
 
-// let ficha = {
-//     nome: usuarioNome,
-//     idade: usuarioIdade,
-//     cidade: usuarioCidade
-// }
-
-// console.table(ficha)
+let ficha = {
+    nome: usuarioNome,
+    idade: usuarioIdade,
+    cidade: usuarioCidade
+ }
+ console.table(ficha)
 
 
 // ------------------------------------------------------------
