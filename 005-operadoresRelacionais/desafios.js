@@ -100,20 +100,40 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // DESAFIO 3 – Boletim escolar
 // ------------------------------------------------------------
+// → Seu código aqui:
 // a) Peça ao usuário o nome de um aluno e suas 4 notas (questionFloat()).
+let aluno = {
+    nome: lerTeclado.question(`Digite seu nome: `),
+    nota: lerTeclado.questionFloat(`digite a primeira nota: `),
+    nota2: lerTeclado.questionFloat(`digite a segunda nota: `),
+    nota3: lerTeclado.questionFloat(`digite a terceira nota: `),
+    nota4: lerTeclado.questionFloat(`digite a quarta nota: `),
+}
 // b) Calcule a média das 4 notas (use toFixed(2)).
+let media = ((aluno.nota + aluno.nota2 + aluno.nota3 + aluno.nota4)/4).toFixed(2)
 // c) Crie um objeto "boletim" com as propriedades:
 //    nome, notas (array com as 4 notas) e media.
+let boletim = {
+    nome: aluno.nome,
+    notas: [aluno.nota, aluno.nota2, aluno.nota3, aluno.nota4],
+    media: media
+}
 // d) Exiba o objeto com console.table().
+console.table(boletim)
 // e) Armazene e exiba os resultados das comparações:
 //    - O aluno está aprovado (média >= 6)?
+let aprovado = media >= 6 ? "Aprovado" : "Não está aprovado"
+console.log(aprovado)
+
 //    - O aluno precisa de recuperação (média >= 4 e média < 6)?
+let recuperacao = media >= 4 && media < 6 ? "Recuperação" : "Reprovado"
+console.log(recuperacao)
 //    - Alguma nota é maior que 9?  (verifique cada array separadamente - utilize a função de array "some()" para isso)
+let NotaMaior9 = (Element) => Element > 9
+console.log(boletim.notas.some(NotaMaior9))
 //    - A maior nota é maior que a menor nota em mais de 3 pontos?
 //      (use Math.max() e Math.min() para encontrar maior e menor)
-
-// → Seu código aqui:
-
+console.log(`A maior nota é maior que a menor nota em mais de 3 pontos? ${(Math.max(boletim.notas) - Math.min(boletim.notas)) > 3? "Sim" : "Não"}`)
 
 console.log("_______________________________");
 
@@ -123,13 +143,66 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // a) Peça ao usuário os dados de 3 produtos e crie um objeto para cada:
 //    nome (question()), preço (questionFloat()) e quantidade em estoque (questionInt()).
+produtoo = {
+    nome: lerTeclado.question(`Digite o nome do produto: `),
+    preco: lerTeclado.questionFloat(`Digite o preço do produto: `),
+    qtdEstoque: lerTeclado.questionInt(`Digite a quantidade em estoque: `)
+}
+produtoo2 = {
+    nome: lerTeclado.question(`Digite o nome do produto: `),
+    preco: lerTeclado.questionFloat(`Digite o preço do produto: `),
+    qtdEstoque: lerTeclado.questionInt(`Digite a quantidade em estoque: `)
+}
+produtoo3 = {
+    nome: lerTeclado.question(`Digite o nome do produto: `),
+    preco: lerTeclado.questionFloat(`Digite o preço do produto: `),
+    qtdEstoque: lerTeclado.questionInt(`Digite a quantidade em estoque: `)
+}
 // b) Crie um array "estoque" e armazene os 3 produtos.
+let estoque = [produtoo, produtoo2, produtoo3]
 // c) Exiba o array com console.table().
+console.table(estoque)
 // d) Para cada produto, armazene em variáveis booleanas e exiba:
 //    - O produto tem estoque disponível (quantidade > 0)?
+let disponível = `${estoque[0] > 0}`
+console.log(`O produto ${estoque[0].nome} tem estoque disponível?: ${disponível? "Sim" : "não"}`)
+
+let disponível2 = `${estoque[1] > 0}`
+console.log(`O produto ${estoque[1].nome} tem estoque disponível?: ${disponível2? "Sim" : "não"}`)
+
+let disponível3 = `${estoque[2] > 0}`
+console.log(`O produto ${estoque[2].nome} tem estoque disponível?: ${disponível3? "Sim" : "não"}`)
+
 //    - O produto está com estoque baixo (quantidade <= 5)?
+let baixo = `${estoque[0] <= 5}`
+console.log(`O produto ${estoque[0].nome} tem estoque baixo?: ${baixo? "Sim" : "não"}`)
+
+let baixo2 = `${estoque[1] <= 5}`
+console.log(`O produto ${estoque[1].nome} tem estoque baixo?: ${baixo2? "Sim" : "não"}`)
+
+let baixo3 = `${estoque[2] <= 5}`
+console.log(`O produto ${estoque[2].nome} tem estoque baixo?: ${baixo3? "Sim" : "não"}`)
+
 //    - O produto é considerado caro (preço > 100)?
+let caro = `${estoque[0].preco >100}`
+console.log(`O produto ${estoque[0].nome} é caro?: ${caro? "Sim" : "não"}`)
+
+let caro2 = `${estoque[1].preco >100}`
+console.log(`O produto ${estoque[1].nome} é caro?: ${caro2? "Sim" : "não"}`)
+
+let caro3 = `${estoque[2].preco >100}`
+console.log(`O produto ${estoque[2].nome} é caro?: ${caro3? "Sim" : "não"}`)
+
 //    - O produto tem preço abaixo de 50?
+let barato = `${estoque[0].preco <50}`
+console.log(`O produto ${estoque[0].nome} é barato?: ${barato? "Sim" : "não"}`)
+
+let barato2 = `${estoque[1].preco <50}`
+console.log(`O produto ${estoque[1].nome} é barato?: ${barato2? "Sim" : "não"}`)
+
+let barato3 = `${estoque[2].preco <50}`
+console.log(`O produto ${estoque[2].nome} é barato?: ${barato3? "Sim" : "não"}`)
+
 // e) Use template literal identificando cada produto pelo nome.
 
 // → Seu código aqui:
