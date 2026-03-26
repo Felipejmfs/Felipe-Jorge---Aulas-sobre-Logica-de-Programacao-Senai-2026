@@ -4,24 +4,46 @@
 // Instruções: resolva cada desafio no espaço indicado.
 // ============================================================
 
+const lerTeclado = require('readline-sync')
+// // ------------------------------------------------------------
+// // DESAFIO 1 – Classificador de IMC
+// // ------------------------------------------------------------
+// // Já realizamos um exercício similar, mas agora vamos aprimorar e exibir somente o resultado final.
+// // a) Pergunte ao usuário seu nome, peso (kg) e altura (m).
+// // b) Armazene os dados em um objeto "pessoa".
+// let pessoa = {
+//     nome: lerTeclado.question(`Digite o seu nome: `),
+//     peso: lerTeclado.questionFloat(`Digite seu peso: `),
+//     altura: lerTeclado.questionFloat(`Digite sua altura: `)
+// }
+// // c) Calcule o IMC: peso / (altura ** 2). Adicione ao objeto.
+// pessoa.imc = (pessoa.peso / (pessoa.altura ** 2)).toFixed(0)
+// // d) Classifique o IMC usando if/else if/else e adicione a classificação ao objeto:
+// //    - IMC < 18.5          → "Abaixo do peso"
+// //    - IMC >= 18.5 e < 25  → "Peso normal"
+// //    - IMC >= 25 e < 30    → "Sobrepeso"
+// //    - IMC >= 30 e < 35    → "Obesidade grau I"
+// //    - IMC >= 35 e < 40    → "Obesidade grau II"
+// //    - IMC >= 40           → "Obesidade grau III"
+// if (pessoa.imc < 18.5){
+//     pessoa.classificacao = "Abaixo do peso"
+// } else if (pessoa.imc >= 18.5 && pessoa.imc <25){
+//     pessoa.classificacao = "Peso normal"
+// } else if (pessoa.imc >= 25 && pessoa.imc < 30){
+//     pessoa.classificacao = "Sobrepeso"
+// } else if (pessoa.imc >=30 && pessoa.imc < 35){
+//     pessoa.classificacao = "Obesidade grau I"
+// } else if (pessoa.imc >= 35 && pessoa.imc < 40){
+//     pessoa.classificacao = "Obesidade grau 2"
+// } else if (pessoa.imc >= 40){
+//     pessoa.classificacao = "Obesidade grau 3"
+// }
+// // e) Exiba o objeto com console.table().
+// console.table(pessoa)
+// // f) Exiba uma mensagem final:
+// //    "<nome>, seu IMC é <imc> – <classificação>."
+// console.log(`${pessoa.nome}, seu imc é ${pessoa.imc} - ${pessoa.classificacao}`);
 
-// ------------------------------------------------------------
-// DESAFIO 1 – Classificador de IMC
-// ------------------------------------------------------------
-// Já realizamos um exercício similar, mas agora vamos aprimorar e exibir somente o resultado final.
-// a) Pergunte ao usuário seu nome, peso (kg) e altura (m).
-// b) Armazene os dados em um objeto "pessoa".
-// c) Calcule o IMC: peso / (altura ** 2). Adicione ao objeto.
-// d) Classifique o IMC usando if/else if/else e adicione a classificação ao objeto:
-//    - IMC < 18.5          → "Abaixo do peso"
-//    - IMC >= 18.5 e < 25  → "Peso normal"
-//    - IMC >= 25 e < 30    → "Sobrepeso"
-//    - IMC >= 30 e < 35    → "Obesidade grau I"
-//    - IMC >= 35 e < 40    → "Obesidade grau II"
-//    - IMC >= 40           → "Obesidade grau III"
-// e) Exiba o objeto com console.table().
-// f) Exiba uma mensagem final:
-//    "<nome>, seu IMC é <imc> – <classificação>."
 
 // → Seu código aqui:
 
@@ -37,8 +59,15 @@ console.log("_______________________________");
 //    - saldo: 1500
 //    - bloqueada: false
 //    - senha: 1234
+let conta = {
+    titular: "Maria",
+    saldo: 1500,
+    bloqueada: false,
+    senha: 1234
+}
 // b) Peça ao usuário:
 //    - Senha de 4 dígitos.
+
 // c) Verifique se a senha está correta.
 //    - Se estiver incorreta → "Senha incorreta. Operação cancelada."
 //    - Se estive correta, pergunte ao usuário se deseja sacar ou depositar um valor
@@ -57,7 +86,35 @@ console.log("_______________________________");
 //       "Depósito de R$ <valor> realizado. Novo saldo: R$ <saldo>"
 // Evite repetir linhas de código.
 // Verifique se é possível fazer verificações uma única vez, alterando a lógica ao invés de duplicar código.
+let senhaRecebida =lerTeclado.questionInt(`Digite a senha de 4 digitos: `)
+let saqueOuDeposito
 
+if (conta.senha != senhaRecebida){
+    console.log("Senha incorreta. Operação cancelada.")
+} else {
+    if(conta.bloqueada){
+    console.log("Conta bloqueada. Procure uma agência")
+} else {
+    if (lerTeclado.keyInYN(`Digite y para sacar e n para depositar: `)){
+        valorSaqueOuDeposito = lerTeclado.questionInt(`Quanto quer sacar? `)
+        if (valorSaqueOuDeposito <= 0){
+            console.log("Valor invalido");
+        } else if (conta.saldo < valorSaqueOuDeposito){
+            console.log(`Saldo insuficiente. Saldo atual: R$${conta.saldo}`)
+        } else {
+            conta.saldo -= valorSaqueOuDeposito
+            console.log(`Saque de R$${valorSaqueOuDeposito} realizado. Novo saldo: R$${conta.saldo}`)
+        }
+    } else {
+        valorSaqueOuDeposito = lerTeclado.questionInt(`Quanto quer depositar?: `)
+        if (valorSaqueOuDeposito <= 0){
+            console.log("Valor invalido");
+        }  else {
+            conta.saldo += valorSaqueOuDeposito
+            console.log(`Depósito de R$${valorSaqueOuDeposito} realizado. Novo saldo: R$${conta.saldo}`)
+        }
+    }
+}}
 // → Seu código aqui:
 
 
@@ -82,13 +139,34 @@ console.log("_______________________________");
 //      0 – Livre | 10 – 10 anos | 12 – 12 anos |
 //      14 – 14 anos | 16 – 16 anos | 18 – 18 anos
 // b) Armazene os dados em um objeto "cinema".
+
 // c) Usando if/else if/else, verifique se o espectador pode assistir ao filme:
 //    - Se a classificação for 0 (Livre) → sempre pode.
 //    - Nos demais casos, compare a idade com a classificação.
 // d) Exiba o resultado:
 //    - Pode assistir → "<nome> pode assistir. Boa sessão!"
 //    - Não pode → "<nome> não pode assistir. Classificação: <classificação> anos."
+let cinema = {
+    nome: lerTeclado.question(`Digite seu nome: `),
+    idade: lerTeclado.questionInt(`Digite sua idade: `),
+    classificacao: lerTeclado.questionInt(`Digite a classificação do filme escolhido:  `)
+}
 
+if (cinema.classificacao == 0){
+    console.log(`${cinema.nome} pode assistir. Boa sessão!`)
+} else if (cinema.classificacao == 10 && cinema.idade >= 10){
+    console.log(`${cinema.nome} pode assistir. Boa sessão!`)
+} else if (cinema.classificacao == 12 && cinema.idade >= 12){
+    console.log(`${cinema.nome} pode assistir. Boa sessão!`)
+} else if (cinema.classificacao == 14 && cinema.idade >= 14){
+    console.log(`${cinema.nome} pode assistir. Boa sessão!`)
+} else if (cinema.classificacao == 16 && cinema.idade >= 16){
+    console.log(`${cinema.nome} pode assistir. Boa sessão!`)
+} else if (cinema.classificacao == 18 && cinema.idade >= 18){
+    console.log(`${cinema.nome} pode assistir. Boa sessão!`)
+} else {
+    console.log(`${cinema.nome} não pode assistir. Classificação: ${cinema.classificacao} anos.`)
+}
 // → Seu código aqui:
 
 
