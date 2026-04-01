@@ -3,7 +3,7 @@
 // ============================================================
 // Instruções: resolva cada desafio no espaço indicado.
 // ============================================================
-
+let lerTeclado = require('readline-sync');
 
 // ------------------------------------------------------------
 // DESAFIO 1 – Simulador de caixa de restaurante
@@ -35,9 +35,24 @@
 //    Atualize o total no objeto.
 // e) Exiba o objeto com console.table().
 // f) Exiba o recibo final com template literal.
-
 // → Seu código aqui:
 
+
+
+let nome = {
+    nome: lerTeclado.question(`Digite seu nome: `),
+    prato: lerTeclado.questionInt(`Digite numero do prato desejado: `),
+    bebida: lerTeclado.questionInt(`Digite numero da bebida desejada: `)
+}
+
+switch (nome.prato) {
+    case 1:
+        
+        break;
+
+    default:
+        break;
+}
 
 console.log("_______________________________");
 
