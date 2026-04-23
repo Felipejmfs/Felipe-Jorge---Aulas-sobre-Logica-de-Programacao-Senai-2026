@@ -139,8 +139,19 @@ console.log("_______________________________");
 //    "Menor temperatura: <menor>°C"
 
 // → Seu código aqui:
-
-
+const temperaturas = [28, 15, 32, 9, 21, 37, 14, 25]
+let maior = null
+let menor = null
+for (let i = 1; i < temperaturas.length; i++) {
+    if (temperaturas[i] > temperaturas[0]){
+        maior = temperaturas[i]
+    }
+    if (temperaturas[i] < temperaturas[0]){
+        menor = temperaturas[i]
+    }
+}
+console.log(`Maior temperatura: ${maior}°C`);
+console.log(`Menor temperatura: ${menor}°C`);
 console.log("_______________________________");
 
 
@@ -153,8 +164,20 @@ console.log("_______________________________");
 //    - Quantas pessoas são menores de idade (< 18)
 //    - Quantas são maiores de idade (>= 18)
 // c) Exiba os dois totais.
-
 // → Seu código aqui:
+let qtdMaiorIdade = 0;
+let qtdMenorIdade = 0;
+
+for (let i = 0; i < idades.length; i++){
+    if (idades[i] > 18){
+        qtdMaiorIdade++
+    } else if (idades[i] < 18){
+        qtdMenorIdade++
+    }
+}
+console.log(`Quantidade de pessoas maiores de idade: ${qtdMaiorIdade}`);
+console.log(`Quantidade de pessoas moenores de idade: ${qtdMenorIdade}`);
+console.log(`Quantidade total de pessoas: ${qtdMenorIdade + qtdMaiorIdade}`);
 
 
 console.log("_______________________________");
@@ -170,8 +193,23 @@ console.log("_______________________________");
 // d) Usando outro for, exiba cada salário e se está acima ou abaixo da média:
 //    "R$ 1800,00 – Abaixo da média"
 //    "R$ 3200,00 – Acima da média"
-
 // → Seu código aqui:
+let totalSalarios = 0
+
+for (let i = 0; i < salarios.length; i++){
+    totalSalarios += salarios[i]
+}
+let mediaSalario = totalSalarios / salarios.length
+console.log(`A média de salários é: ${mediaSalario}`);
+
+
+for (let i = 0; i < salarios.length; i++){
+    if (salarios[i] >= 3200){
+        console.log(`R$ ${salarios[i]} - Acima da média`);
+    } else {
+        console.log(`R$ ${salarios[i]} - Abaixo da média`);
+    }
+}
 
 
 console.log("_______________________________");
@@ -195,6 +233,40 @@ console.log("_______________________________");
 // g) Exiba o array 'turma' com console.table().
 
 // → Seu código aqui:
+let turma = []
+let somaTotal = 0
+
+for (let i = 1; i < 3; i++){
+    let aluno = {
+        nome: lerTeclado.question(`Digite o nome do aluno: `),
+        nota1: lerTeclado.questionInt(`Digite a primeira nota do aluno: `),
+        nota2: lerTeclado.questionInt(`Digite a segunda nota do aluno: `),
+        nota3: lerTeclado.questionInt(`Digite a terceira nota do aluno: `),
+        mediaAluno: null,
+        situação: null
+    }
+    turma.push(aluno)
+}
+
+for (let i = 0; i < turma.length; i++){
+    somaTotal += (turma[i].nota1 + turma[i].nota2 + turma[i].nota3)
+}
+
+let media = somaTotal / (turma.length ** 3)
+
+for (let i = 0; i < turma.length;  i++){
+    turma[i].mediaAluno = (turma[i].nota1 + turma[i].nota2 + turma[i].nota3) / (turma.length ** 3)
+    if (turma[i].mediaAluno >= 7) {
+        turma[i].situação = "Aprovado"
+    } else if (turma[i].mediaAluno >= 5){
+        turma[i].situação = "Recuperação"
+    } else {
+        turma[i].situação = "Reprovado"
+    }
+    console.log(`Nome: ${turma[i].nome}: média: ${turma[i].mediaAluno} / situação: ${turma[i].situação}`);
+}
+console.log(`Média da turma: ${media}`);
+console.table(turma)
 
 
 console.log("_______________________________");
@@ -214,6 +286,18 @@ console.log("_______________________________");
 // f) Exiba o array com console.table().
 
 // → Seu código aqui:
+
+
+let qtdProdutos = lerTeclado.questionInt(`Quantos produtos quer cadastrar?: `)
+let estoque = []
+
+for (let i = 1; i <= qtdProdutos; i++){
+    let produto = {
+        nome: lerTeclado.question(`Digite o nome do produto: `),
+        preco: lerTeclado.questionFloat(`Digite o preco do produto: `)
+    }
+    estoque.push(produto)
+}
 
 
 console.log("_______________________________");
