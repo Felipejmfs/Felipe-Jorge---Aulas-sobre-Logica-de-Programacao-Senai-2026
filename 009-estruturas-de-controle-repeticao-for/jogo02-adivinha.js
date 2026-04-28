@@ -143,10 +143,10 @@ switch (modo) {
                         process.exit()
                         break;
                     case 2:
-                        palpitePc /= 2
+                        palpitePc = Math.floor((palpitePc + NUM_MIN) / 2)
                         break;
-                    case 3:
-                    palpitePc *= 1,5
+                    case 3: = Math.floor((palpitePc + NUM_MAX) / 2)
+                    palpitePc 
                         break;
                 }
             }
