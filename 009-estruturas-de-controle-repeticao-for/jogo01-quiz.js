@@ -58,7 +58,7 @@ const perguntas = [
     resposta: "C"
   }
 ];
-
+let lerTeclado = require('readline-sync');
 
 // ============================================================
 // INÍCIO DO JOGO
@@ -70,12 +70,17 @@ console.log("==================================");
 
 // PASSO 1 – Peça o nome do jogador e dê as boas-vindas.
 //           Exiba as regras:
-//           - Total de perguntas. (utilizando .length)
-//           - 1 ponto por acerto
-//           - Sem segunda chance por pergunta
+          // - Total de perguntas. (utilizando .length)
+          // - 1 ponto por acerto
+          // - Sem segunda chance por pergunta
 
 // → Seu código aqui:
-
+let nome = lerTeclado.question(`Digite seu nome: `)
+console.log(`          
+- Total de perguntas: ${perguntas.length}
+- 1 ponto por acerto
+- Sem segunda chance por pergunta
+`);
 
 console.log("\n_______________________________");
 
@@ -86,6 +91,7 @@ console.log("\n_______________________________");
 //
 // PASSO 2 – Inicialize o acumulador de pontos:
 //
+let pontos = 0
 // PASSO 3 – Use um for() de 0 até perguntas.length - 1 para percorrer o array de perguntas:
 //
 //   a) Exiba o número da pergunta e o total:
@@ -110,6 +116,24 @@ console.log("\n_______________________________");
 //          Exiba: "Errado! A resposta correta era: <resposta>"
 
 // → Seu código aqui:
+for (let i = 0; i < perguntas.length - 1; i++){
+
+  console.log(`Pergunta ${i+1}, de ${perguntas.length} perguntas.`);
+  console.log(`${perguntas[i].texto}`);
+  console.log(`A) ${perguntas[i].opcoes[0]}`);
+  console.log(`B) ${perguntas[i].opcoes[1]}`);
+  console.log(`C) ${perguntas[i].opcoes[2]}`);
+  console.log(`D) ${perguntas[i].opcoes[3]}`);
+
+  let resposta = lerTeclado.question(`Digite a sua resposta: `).toUpperCase()
+
+  if (resposta == perguntas[i].resposta){
+    console.log("Correto!");
+    pontos++;
+  } else {
+    console.log(`Errado! A respota era: ${perguntas[i].resposta}`);
+  }
+}
 
 
 console.log("\n_______________________________");
@@ -121,6 +145,7 @@ console.log("\n_______________________________");
 //
 // PASSO 4 – Após o for(), calcule o aproveitamento em % (pontos / perguntas.length) * 100;
 //
+let aproveitamento = (pontos / perguntas.length) ** 100
 // PASSO 5 – Determine a classificação:
 //           100%      → "PERFEITO! Gênio!"
 //           75% a 99% → "Excelente! Quase lá!"
@@ -128,19 +153,39 @@ console.log("\n_______________________________");
 //           25% a 49% → "Regular. Vale estudar mais."
 //           abaixo    → "Fraco. Bora revisar o conteúdo!"
 //
+let classificacao = ""
+if (aproveitamento = 100){
+  classificacao = "PERFEITO! Gênio!"
+} else if (aproveitamento >= 75){
+  classificacao = "Excelente! Quase lá!"
+} else if (aproveitamento >= 50){
+  classificacao = "Bom! Você sabe bastante."
+} else if (aproveitamento >= 25){
+  classificacao = "Regular. Vale estudar mais."
+} else {
+  classificacao = "Fraco. Bora revisar o conteúdo!"
+}
 // PASSO 6 – Exiba o resultado final:
-//           "|==============================================="
-//           "| RESULTADO FINAL"
-//           "| Jogador: <nome>"
-//           "| Acertos: <pontos> de <total>"
-//           "| Aproveitamento: <aproveitamento>%"
-//           "| Classificação: <classificacao>"
-//           "==============================================="
+          // "|==============================================="
+          // "| RESULTADO FINAL"
+          // "| Jogador: <nome>"
+          // "| Acertos: <pontos> de <total>"
+          // "| Aproveitamento: <aproveitamento>%"
+          // "| Classificação: <classificacao>"
+          // "==============================================="
 //
+console.log(`        
+|===============================================
+| RESULTADO FINAL
+| Jogador: ${nome}
+| Acertos: ${pontos} de ${perguntas.length}
+| Aproveitamento: ${aproveitamento}%
+| Classificação: ${classificacao}
+===============================================)
+`)
+
+
 // PASSO 7 – Armazene o resultado em um objeto e exiba com console.table():
 //           { jogador, acertos, total, aproveitamento, classificacao }
 
 // → Seu código aqui:
-
-
-console.log("\nObrigado por jogar!");

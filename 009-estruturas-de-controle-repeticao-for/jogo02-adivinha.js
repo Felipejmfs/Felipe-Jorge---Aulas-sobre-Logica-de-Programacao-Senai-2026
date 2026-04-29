@@ -145,8 +145,9 @@ switch (modo) {
                     case 2:
                         palpitePc = Math.floor((palpitePc + NUM_MIN) / 2)
                         break;
-                    case 3: = Math.floor((palpitePc + NUM_MAX) / 2)
-                    palpitePc 
+                    case 3:
+                        palpitePc = Math.floor((palpitePc + NUM_MAX) / 2)
+                        
                         break;
                 }
             }
