@@ -4,7 +4,7 @@
 // Instruções: resolva cada desafio no espaço indicado.
 // ============================================================
 
-
+const lerTeclado = require('readline-sync')
 // ------------------------------------------------------------
 // DESAFIO 1 – Progressão de saldo bancário
 // ------------------------------------------------------------
@@ -25,8 +25,22 @@
 // e) Desafio extra: ao invés de exibir mês 1, mês 2, mês 3, etc.
 //    exiba Janeiro, Fevereiro, Março, etc.
 //    Atenção para casos que ultrapassem 12 meses...
-
 // → Seu código aqui:
+let saldo = lerTeclado.questionFloat(`Digite seu saldo inicial: `)
+let taxa = lerTeclado.questionFloat(`Digite a taxa de juros mensal: `)
+let meta = lerTeclado.questionFloat(`Digite e ameta de saldo: `)
+let qtdMes = 0
+while (saldo < meta) {
+  saldo = saldo * (1 + taxa / 100)
+  qtdMes++
+}
+
+
+
+
+
+
+
 
 
 console.log("_______________________________");
