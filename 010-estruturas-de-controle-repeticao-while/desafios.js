@@ -26,14 +26,14 @@ const lerTeclado = require('readline-sync')
 //    exiba Janeiro, Fevereiro, Março, etc.
 //    Atenção para casos que ultrapassem 12 meses...
 // → Seu código aqui:
-let saldo = lerTeclado.questionFloat(`Digite seu saldo inicial: `)
-let taxa = lerTeclado.questionFloat(`Digite a taxa de juros mensal: `)
-let meta = lerTeclado.questionFloat(`Digite e ameta de saldo: `)
-let qtdMes = 0
-while (saldo < meta) {
-  saldo = saldo * (1 + taxa / 100)
-  qtdMes++
-}
+// let saldo = lerTeclado.questionFloat(`Digite seu saldo inicial: `)
+// let taxa = lerTeclado.questionFloat(`Digite a taxa de juros mensal: `)
+// let meta = lerTeclado.questionFloat(`Digite e ameta de saldo: `)
+// let qtdMes = 0
+// while (saldo < meta) {
+//   saldo = saldo * (1 + taxa / 100)
+//   qtdMes++
+// }
 
 
 
@@ -73,11 +73,11 @@ console.log("_______________________________");
 //
 // a) Utilizando a lista de produtos:
 let produtos = [
-  { nome: "Caneta",  preco: 2.5,  estoque: 50 },
+  { nome: "Caneta", preco: 2.5, estoque: 50 },
   { nome: "Caderno", preco: 18.9, estoque: 25 },
   { nome: "Mochila", preco: 89.0, estoque: 15 },
-  { nome: "Régua",   preco: 4.75, estoque: 35 },
-  { nome: "Estojo",  preco: 12.3, estoque: 10 }
+  { nome: "Régua", preco: 4.75, estoque: 35 },
+  { nome: "Estojo", preco: 12.3, estoque: 10 }
 ]
 // b) Usando do...while, repita o fluxo de compra:
 //    - Exiba o menu de produtos com preços usando console.table().
@@ -113,6 +113,36 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+// let senhaCorreta = "js2025"
+// let senha = null
+// let tentativas = 3
+// let tentativasUsadas = 0
+// let final = []
+// let resultado = ""
+
+// while (senha !== senhaCorreta) {
+//   tentativas--
+//   tentativasUsadas++
+//   senha = lerTeclado.question(`Digite a senha: `)
+
+//   if (senha == senhaCorreta) {
+//       console.log("Acesso liberado!")
+//       resultado = "Liberado"
+//       break
+//   } else if (tentativas > 0) {
+//       console.log("Restam ", tentativas, "tentativas.")
+//   } else {
+//     console.log("Conta bloqueada!")
+//     resultado = "Bloqueado"
+//     break
+//   }
+// }
+
+// console.table(
+//   {
+//   tentativasUsadass: tentativasUsadas,
+//   testedasenha: resultado
+// })
 
 console.log("_______________________________");
 
@@ -136,6 +166,111 @@ console.log("_______________________________");
 // Observação: Realize os cálculos conforme solicitado, não se preocupando com a ordem/sequência lógica matemática
 
 // → Seu código aqui:
+let resultado = 0
+let operacao = null
+let numeroB = 0
+let operacaoSecundaria = null
+let numerosOperados = []
+let localizador = 0
+
+do {
+  let numeroA = lerTeclado.questionInt(`Digite o numero que quer operar: `)
+  console.log("1 – Somar | 2 – Subtrair | 3 – Multiplicar | 4 – Dividir | 5 – Zerar | 0 – Sair")
+  operacao = lerTeclado.questionInt(`Escolha uma opcao: `)
+
+  if (operacao == 0) {
+    console.log("Você saiu da calculadora.")
+    break
+  }
+
+  if (operacao == 5) {
+    resultado = 0
+    console.log("Resultado zerado.")
+    continue;
+  } else {
+    numeroB = lerTeclado.questionInt(`Digite outro numero que quer operar: `)
+  }
+
+  switch (operacao) {
+    case 1:
+      resultado = numeroA + numeroB
+      break;
+
+    case 2:
+      resultado = numeroA - numeroB
+      break;
+
+    case 3:
+      resultado = numeroA * numeroB
+      break;
+
+    case 4:
+      if (numeroB == 0) {
+        console.log("Divisão inválida")
+        process.exit()
+      } else {
+        resultado = numeroA / numeroB
+      }
+      break;
+
+    default:
+      console.log("Operação inválida, tente novamente")
+      break;
+  }
+
+  // Segunda parte do código
+
+  do {
+    console.log("1 – Somar | 2 – Subtrair | 3 – Multiplicar | 4 – Dividir | 5 – Zerar | 6 - Resultado")
+    operacaoSecundaria = lerTeclado.questionInt(`Escolha outra opcao: `)
+    
+    if (operacaoSecundaria == 5) {
+      resultado = 0
+      console.log("Resultado zerado.")
+      continue
+    } else if (operacaoSecundaria > 0 && operacaoSecundaria < 5 && operacaoSecundaria !== 6) {
+      numerosOperados.push(lerTeclado.questionInt(`Digite o número que quer operar: `))
+    }
+
+    switch (operacaoSecundaria) {
+      case 1:
+        resultado += numerosOperados[localizador]
+        break;
+
+      case 2:
+        resultado -= numerosOperados[localizador]
+        break;
+
+      case 3:
+        resultado *= numerosOperados[localizador]
+        break;
+
+      case 4:
+        if (numerosOperados[localizador] == 0) {
+          console.log("Divisão inválida")
+          process.exit()
+        } else {
+          resultado /= numerosOperados[localizador]
+        }
+        break;
+
+      case 6:
+        console.log("Resultado final: ", resultado);
+        process.exit()
+    }
+    localizador++
+  } while (operacaoSecundaria !== 6);
+
+  // Segunda parte do código
+  console.log("Resultado final: ", resultado);
+  console.log("___________________________________________");
+
+} while (operacao !== 0);
+
+
+
+
+
 
 
 console.log("_______________________________");
