@@ -166,17 +166,28 @@ console.log("_______________________________");
 // Observação: Realize os cálculos conforme solicitado, não se preocupando com a ordem/sequência lógica matemática
 
 // → Seu código aqui:
+
+// ========================
+// Declaração de variáveis
 let resultado = 0
 let operacao = null
 let numeroB = 0
 let operacaoSecundaria = null
-let numerosOperados = []
-let localizador = 0
+let proximoNumero = 0
+// ========================
 
 do {
+// ========================================================================
+// Solicitando os dois primeros números a serem trabalhados, qual operação e verficação
   let numeroA = lerTeclado.questionInt(`Digite o numero que quer operar: `)
+
   console.log("1 – Somar | 2 – Subtrair | 3 – Multiplicar | 4 – Dividir | 5 – Zerar | 0 – Sair")
   operacao = lerTeclado.questionInt(`Escolha uma opcao: `)
+
+  if(operacao < 0 || operacao > 5) {
+    console.log("Operação inválida. Tente novamente.")
+    continue
+  }
 
   if (operacao == 0) {
     console.log("Você saiu da calculadora.")
@@ -190,7 +201,10 @@ do {
   } else {
     numeroB = lerTeclado.questionInt(`Digite outro numero que quer operar: `)
   }
+// ========================================================================
 
+// ========================================================================
+// Calculo das operações
   switch (operacao) {
     case 1:
       resultado = numeroA + numeroB
@@ -207,7 +221,7 @@ do {
     case 4:
       if (numeroB == 0) {
         console.log("Divisão inválida")
-        process.exit()
+        break
       } else {
         resultado = numeroA / numeroB
       }
@@ -217,50 +231,55 @@ do {
       console.log("Operação inválida, tente novamente")
       break;
   }
-
-  // Segunda parte do código
-
+// ========================================================================
+// Segunda parte do código, continuação caso o usuário queira operar mais que dois números
   do {
     console.log("1 – Somar | 2 – Subtrair | 3 – Multiplicar | 4 – Dividir | 5 – Zerar | 6 - Resultado")
     operacaoSecundaria = lerTeclado.questionInt(`Escolha outra opcao: `)
-    
+
+// verficação
+    if(operacaoSecundaria < 1 || operacaoSecundaria > 6) {
+      console.log("Operação inválida. Tente novamente.")
+      continue
+    }
+// =================================
+
     if (operacaoSecundaria == 5) {
       resultado = 0
       console.log("Resultado zerado.")
       continue
     } else if (operacaoSecundaria > 0 && operacaoSecundaria < 5 && operacaoSecundaria !== 6) {
-      numerosOperados.push(lerTeclado.questionInt(`Digite o número que quer operar: `))
+      proximoNumero = lerTeclado.questionInt(`Digite o número que quer operar: `)
     }
 
-    switch (operacaoSecundaria) {
-      case 1:
-        resultado += numerosOperados[localizador]
-        break;
-
-      case 2:
-        resultado -= numerosOperados[localizador]
-        break;
-
-      case 3:
-        resultado *= numerosOperados[localizador]
-        break;
-
-      case 4:
-        if (numerosOperados[localizador] == 0) {
-          console.log("Divisão inválida")
-          process.exit()
-        } else {
-          resultado /= numerosOperados[localizador]
-        }
-        break;
-
-      case 6:
-        console.log("Resultado final: ", resultado);
-        process.exit()
-    }
-    localizador++
+// Faz o cálculo sempre com o último número informado
+switch (operacaoSecundaria) {
+  case 1:
+  resultado += proximoNumero
+  break;
+  
+  case 2:
+  resultado -= proximoNumero
+  break;
+  
+  case 3:
+  resultado *= proximoNumero
+  break;
+  
+  case 4:
+  if (proximoNumero == 0) {
+    console.log("Divisão inválida")
+    continue
+  } else {
+    resultado /= proximoNumero
+  }
+  break;
+  
+  case 6:
+  break
+}
   } while (operacaoSecundaria !== 6);
-
+// ========================================================================
   // Segunda parte do código
   console.log("Resultado final: ", resultado);
   console.log("___________________________________________");
