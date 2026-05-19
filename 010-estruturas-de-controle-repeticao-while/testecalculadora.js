@@ -3,7 +3,7 @@ const lerTeclado = require('readline-sync')
 let operacaoSecundaria = null
 let numerosOperados = []
 let localizador = 0
-
+while (operacaoSecundaria !== 6){
 do {
     console.log("1 – Somar | 2 – Subtrair | 3 – Multiplicar | 4 – Dividir | 5 – Zerar | 6 - Resultado")
 
@@ -32,7 +32,7 @@ do {
         case 4:
           if(numerosOperados[localizador] == 0) {
             console.log("Divisão inválida")
-            process.exit()
+            continue
           } else {
             resultado /= numerosOperados[localizador]
           }
@@ -41,3 +41,4 @@ do {
 
         localizador++
 } while (operacaoSecundaria !== 6);
+}
