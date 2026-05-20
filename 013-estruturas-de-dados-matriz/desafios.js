@@ -1,16 +1,38 @@
 // ============================================================
 //   DESAFIOS – Matriz
 // ============================================================
-
+const lerTeclado = require('readline-sync')
 
 // ------------------------------------------------------------
 // DESAFIO 1 – Jogo da velha simplificado
 // ------------------------------------------------------------
 // a) Declare um tabuleiro 3x3 vazio (preencha os espaços vazios com "-") e exiba-o.
+let tabuleiro = [
+  ["-", "-", "-"],
+  ["-", "-", "-"],
+  ["-", "-", "-"]
+]
 // b) Faça 5 jogadas alternando entre "X" e "O":
 //    - Peça a linha e a coluna.
 //    - Se a posição já estiver ocupada, exiba aviso e peça novamente.
 //    - Após cada jogada, exiba o tabuleiro com console.table().
+
+// for (let i = 0; i < 5; i++) {
+//   let posiçãoLinha = lerTeclado.questionInt(`Digite a linha: `)
+//   let posiçãoColuna = lerTeclado.questionInt(`Digite a coluna: `)
+
+//   for (let j = 0; j < 1; j++) {
+//     if (i % 2 == 0) {
+//       tabuleiro[posiçãoLinha][posiçãoColuna] = "X"
+//     } else {
+//       tabuleiro[posiçãoLinha][posiçãoColuna] = "O"
+//     }
+//     console.table(tabuleiro)
+//   }
+// }
+
+// console.table(tabuleiro)
+
 // c) Não precisa verificar vencedor — apenas alternar X e O.
 
 // → Seu código aqui:
@@ -24,12 +46,80 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // a) Crie um tabuleiro 5x5 (matriz de objetos):
 //    cada célula = { temNavio: false, atingida: false }
+let navios = []
+let mapa = []
+
+for (let i = 0; i < 5; i++) {
+  let agua = []
+  for (let j = 0; j < 5; j++) {
+    agua.push("~")
+  }
+  mapa.push(agua)
+}
+
+for (let i = 0; i < 5; i++) {
+  let linha = []
+  for (let j = 0; j < 5; j++) {
+    linha.push({ temNavio: false, atingida: false })
+  }
+  navios.push(linha)
+}
 // b) Posicione 5 navios em coordenadas aleatórias utilizando Math.random()
 //    Garanta que não haja repetição de posição.
+
+for (let i = 0; i < 5; i++) {
+  console.log("POSICINANDO NAVIOS");
+  let linhaN = lerTeclado.questionInt(`Digite a linha: `)
+  let colunaN = lerTeclado.questionInt(`Digite a coluna: `)
+  if (linhaN > 4 || linhaN <= -1 || colunaN > 4 || colunaN <= -1) {
+    console.log("Posição inválida. Tente novamente.")
+    i--
+    continue
+  }
+  if (navios[linhaN][colunaN].temNavio) {
+    i--
+    console.log("Já tem um návio nessa posição.");
+    continue
+  }
+  navios[linhaN][colunaN].temNavio = true
+  mapa[linhaN][colunaN] = "O"
+}
 // c) Usando while, peça ao usuário tiros (linha e coluna).
 //    - Se acertar:  exiba "Acertou!" (e marque atingida = true).
 //    - Se errar:    exiba "Água..."
 //    - Não permita atirar 2x na mesma posição.
+let acertos = 0
+let tirosUsados = 0
+
+while (acertos < 5) {
+  console.log("ATIRANDO NOS NAVIOS");
+  let linhaTiro = lerTeclado.questionInt(`Linha do tiro: `)
+  let colunaTiro = lerTeclado.questionInt(`Coluna do tiro: `)
+  if (linhaTiro > 4 || linhaTiro <= -1 || colunaTiro > 4 || colunaTiro <= -1) {
+    console.log("Posição inválida. Tente novamente.")
+    continue
+  }
+  if (navios[linhaTiro][colunaTiro].atingida) {
+    console.log("Você já atirou nessa posição! ")
+    continue
+  }
+  if (navios[linhaTiro][colunaTiro].temNavio) {
+    console.log("Acertou!");
+    mapa[linhaTiro][colunaTiro] = "X"
+    acertos++
+  } else {
+    console.log(`Água...`)
+    mapa[linhaTiro][colunaTiro] = "-"
+  }
+  navios[linhaTiro][colunaTiro].atingida = true
+  console.table(mapa)
+  tirosUsados++
+}
+
+if (acertos == 5) {
+  console.log(`Parabéns, você acertou todos navios em ${tirosUsados} tiros!`)
+}
+
 // d) Após cada tiro, mostre o "mapa":
 //    "~" = água, "O" = navio não atingido, "X" = navio atingido.
 // e) Pare quando todos os 5 navios forem atingidos.
@@ -46,11 +136,11 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // a) Utilizando:
 const turma = [
-  { nome: "Ana",    notas: [8.0, 7.5, 9.0, 6.5] },
-  { nome: "Bruno",  notas: [4.0, 5.5, 6.0, 5.0] },
-  { nome: "Carla",  notas: [9.5, 9.0, 9.5, 10]  },
-  { nome: "Diego",  notas: [7.0, 6.5, 7.0, 8.5] },
-  { nome: "Eva",    notas: [3.5, 4.0, 5.0, 4.5] },
+  { nome: "Ana", notas: [8.0, 7.5, 9.0, 6.5] },
+  { nome: "Bruno", notas: [4.0, 5.5, 6.0, 5.0] },
+  { nome: "Carla", notas: [9.5, 9.0, 9.5, 10] },
+  { nome: "Diego", notas: [7.0, 6.5, 7.0, 8.5] },
+  { nome: "Eva", notas: [3.5, 4.0, 5.0, 4.5] },
 ];
 // b) Construa um vetor 'boletim' onde cada item seja:
 //    { nome, b1, b2, b3, b4, media, situacao }
