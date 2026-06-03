@@ -19,8 +19,35 @@
 // d) Chame agora() três vezes (com um intervalo de 5 segundos entre as chamadas).
 
 // → Seu código aqui:
+function mostrarHora() {
+  const agora = new Date();
+  const horas = agora.getHours();
+  const minutos = agora.getMinutes();
+  const segundos = agora.getSeconds();
+  console.log(`${horas}:${minutos}:${segundos}`)
+}
+function mostrarData() {
+  const hoje = new Date();
+  const dia = hoje.getDate();
+  const mes = hoje.getMonth() + 1; // Soma +1 porque os meses no JS começam em 0 (Janeiro)
+  const ano = hoje.getFullYear();
+  console.log(`${dia}/${mes}/${ano}`);
+}
+function agora() {
+  mostrarData()
+  mostrarHora()
+}
+for (let i = 1; i <= 1; i++) {
+  agora()
+  setTimeout(() => {
+    agora()
+    setTimeout(() => {
+      agora()
 
+    }, 5000);
 
+  }, 5000);
+}
 console.log("_______________________________");
 
 
@@ -30,7 +57,7 @@ console.log("_______________________________");
 // Vamos imprimir vários "cartões" estilizados no console.
 //
 // a) Utilizando os arrays:
-const nomes  = ["Ana", "Bruno", "Carla", "Diego", "Eva"];
+const nomes = ["Ana", "Bruno", "Carla", "Diego", "Eva"];
 const cargos = ["Dev Junior", "Dev Pleno", "Tech Lead", "QA", "Designer"];
 //
 // b) Crie a função 'imprimirCartao' que:
@@ -44,6 +71,11 @@ const cargos = ["Dev Junior", "Dev Pleno", "Tech Lead", "QA", "Designer"];
 // c) Chame imprimirCartao() 5 vezes.
 
 // → Seu código aqui:
+function imprimirCartao() {
+
+  console.log(nomes[Math.random() * 5])
+  console.log(cargos[Math.random() * 5])
+}
 
 
 console.log("_______________________________");
@@ -54,10 +86,10 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // a) Utilizando o array:
 const noticias = [
-  { titulo: "Tecnologia X é lançada",  texto: "Empresa Y revoluciona o mercado..." },
-  { titulo: "Economia em alta",        texto: "Bolsa fecha o dia em alta de 2%..." },
-  { titulo: "Esporte: time campeão",   texto: "O time A conquistou o título..." },
-  { titulo: "Cultura: novo filme",     texto: "Estreia no cinema o longa Z..." },
+  { titulo: "Tecnologia X é lançada", texto: "Empresa Y revoluciona o mercado..." },
+  { titulo: "Economia em alta", texto: "Bolsa fecha o dia em alta de 2%..." },
+  { titulo: "Esporte: time campeão", texto: "O time A conquistou o título..." },
+  { titulo: "Cultura: novo filme", texto: "Estreia no cinema o longa Z..." },
 ];
 // b) Crie 1 função 'manchete', que exibe:
 //        |── MANCHETE ─────────────────
