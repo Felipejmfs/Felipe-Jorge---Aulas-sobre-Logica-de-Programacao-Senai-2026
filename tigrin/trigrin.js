@@ -72,10 +72,10 @@ console.log("Tigrin do Felipe, vamos apostar e ganhar!")
 console.log("Valor da ficha: R$10,00");
 console.log(`Saldo atual: R$ ${saldo}`)
 
-opcao()
 
 
 do {
+    opcao()
     switch (escolha) {
         case 1:
             jogar();
