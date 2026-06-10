@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "axios": "^1.17.0",
     "the-game-domain": "^1.2.120"
   }
 }
