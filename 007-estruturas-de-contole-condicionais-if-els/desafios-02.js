@@ -32,7 +32,53 @@
 
 // → Seu código aqui:
 
+let cadastro = {
+    dadosPessoais: {
+        nomeCompleto: lerTeclado.question("Nome completo: "),
+        cpf: lerTeclado.question("CPF: "),
+        idade: lerTeclado.questionInt("Idade: ")
+    },
 
+    endereco: {
+        cidade: lerTeclado.question("Cidade: "),
+        estado: lerTeclado.question("Estado (UF): ")
+    },
+
+    acesso: {
+        usuario: lerTeclado.question("Usuário: "),
+        senha: lerTeclado.question("Senha: "),
+        confirmarSenha: lerTeclado.question("Confirmar senha: ")
+    }
+};
+
+let nomePartes = cadastro.dadosPessoais.nomeCompleto.trim().split(" ");
+
+if (
+    cadastro.dadosPessoais.nomeCompleto.trim() === "" ||
+    nomePartes.length < 2 ||
+    nomePartes[0].length < 2 ||
+    nomePartes[1].length < 2
+) {
+    console.log("Nome completo inválido.");
+}
+else if (cadastro.dadosPessoais.cpf.length !== 11) {
+    console.log("CPF inválido.");
+}
+else if (cadastro.dadosPessoais.idade < 18) {
+    console.log("Idade inválida.");
+}
+else if (cadastro.endereco.estado.length !== 2) {
+    console.log("Estado inválido.");
+}
+else if (cadastro.acesso.senha.length < 8) {
+    console.log("Senha inválida.");
+}
+else if (cadastro.acesso.senha !== cadastro.acesso.confirmarSenha) {
+    console.log("As senhas não coincidem.");
+}
+else {
+    console.log(`Cadastro de ${cadastro.acesso.usuario} realizado com sucesso!`);
+}
 console.log("_______________________________");
 
 
@@ -62,7 +108,54 @@ console.log("_______________________________");
 // f) Exiba: "Reserva confirmada para <nome>! Total: R$ <total>"
 
 // → Seu código aqui:
+let reserva = {
+    hospede: {
+        nome: "",
+        ehSocio: false,
+        temPet: false
+    },
 
+    quarto: {
+        numero: 101,
+        tipo: "standard",
+        petFriendly: false,
+        disponivel: true,
+        precoPorNoite: 250
+    }
+};
+
+// b) Pergunte ao usuário
+
+reserva.hospede.nome = lerTeclado.question("Seu nome: ");
+reserva.hospede.ehSocio = lerTeclado.keyInYN("É sócio do clube de fidelidade? ");
+reserva.hospede.temPet = lerTeclado.keyInYN("Tem animal de estimação? ");
+
+let noites = lerTeclado.questionInt("Quantas noites deseja ficar? ");
+
+// d) Verificações
+
+if (!reserva.quarto.disponivel) {
+    console.log("Quarto indisponível.");
+}
+else if (reserva.hospede.temPet && !reserva.quarto.petFriendly) {
+    console.log("Quarto não aceita animais. Reserva cancelada.");
+}
+else {
+    let total = reserva.quarto.precoPorNoite * noites;
+
+    if (reserva.hospede.ehSocio && noites >= 3) {
+        total = total - (total * 0.15);
+    }
+    else if (reserva.hospede.ehSocio && noites < 3) {
+        total = total - (total * 0.05);
+    }
+
+    console.table(reserva);
+
+    console.log(
+        `Reserva confirmada para ${reserva.hospede.nome}! Total: R$ ${total.toFixed(2)}`
+    );
+}
 
 console.log("_______________________________");
 
@@ -97,7 +190,38 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+let aluno = {
+    dados: {
+        nome: lerTeclado.question("Nome do aluno: "),
+        frequencia: lerTeclado.questionFloat("Frequência (%): ")
+    },
 
+    notas: {
+        nota1: lerTeclado.questionFloat("Nota 1: "),
+        nota2: lerTeclado.questionFloat("Nota 2: "),
+        nota3: lerTeclado.questionFloat("Nota 3: ")
+    }
+};
+
+aluno.notas.media =
+    (aluno.notas.nota1 +
+     aluno.notas.nota2 +
+     aluno.notas.nota3) / 3;
+
+if (aluno.dados.frequencia < 75) {
+    console.log(`Reprovado por falta. Frequência: ${aluno.dados.frequencia}%`);
+}
+else if (aluno.dados.frequencia >= 75 && aluno.notas.media >= 7) {
+    console.log(`Aprovado! Média: ${aluno.notas.media.toFixed(2)} | Frequência: ${aluno.dados.frequencia}%`);
+}
+else if (aluno.dados.frequencia >= 75 && aluno.notas.media >= 5 && aluno.notas.media < 7) {
+    console.log(`Recuperação. Média: ${aluno.notas.media.toFixed(2)} | Frequência: ${aluno.dados.frequencia}%`);
+}
+else {
+    console.log(`Reprovado por nota. Média: ${aluno.notas.media.toFixed(2)}`);
+}
+
+console.table(aluno);
 console.log("_______________________________");
 
 
@@ -140,7 +264,72 @@ console.log("_______________________________");
 //     <parcelas>x de R$ <parcelaMensal> com juros de <taxa>% ao mês."
 
 // → Seu código aqui:
+let solicitacao = {
+    cliente: {
+        nome: lerTeclado.question("Nome: "),
+        renda: lerTeclado.questionFloat("Renda mensal: "),
+        score: lerTeclado.questionInt("Score de crédito: "),
+        possuiDividas: lerTeclado.keyInYN("Possui dívidas? ")
+    },
 
+    emprestimo: {
+        valorSolicitado: lerTeclado.questionFloat("Valor desejado: "),
+        aprovado: false,
+        limite: 0,
+        parcelas: 0,
+        taxaJuros: 0
+    }
+};
+
+if (solicitacao.cliente.possuiDividas || solicitacao.cliente.score < 300) {
+    console.log("Crédito negado. Regularize suas pendências.");
+}
+else if (
+    solicitacao.cliente.score >= 800 &&
+    solicitacao.cliente.renda >= 5000
+) {
+    solicitacao.emprestimo.aprovado = true;
+    solicitacao.emprestimo.limite = solicitacao.cliente.renda * 10;
+    solicitacao.emprestimo.parcelas = 60;
+    solicitacao.emprestimo.taxaJuros = 0.8;
+}
+else if (
+    solicitacao.cliente.score >= 600 &&
+    solicitacao.cliente.renda >= 2000
+) {
+    solicitacao.emprestimo.aprovado = true;
+    solicitacao.emprestimo.limite = solicitacao.cliente.renda * 5;
+    solicitacao.emprestimo.parcelas = 36;
+    solicitacao.emprestimo.taxaJuros = 1.5;
+}
+else if (
+    solicitacao.cliente.score >= 300 &&
+    solicitacao.cliente.score < 600
+) {
+    solicitacao.emprestimo.aprovado = true;
+    solicitacao.emprestimo.limite = solicitacao.cliente.renda * 2;
+    solicitacao.emprestimo.parcelas = 12;
+    solicitacao.emprestimo.taxaJuros = 5;
+}
+
+if (solicitacao.emprestimo.aprovado) {
+    let valorAprovado =
+        solicitacao.emprestimo.valorSolicitado >
+        solicitacao.emprestimo.limite
+            ? solicitacao.emprestimo.limite
+            : solicitacao.emprestimo.valorSolicitado;
+
+    let parcelaMensal =
+        (valorAprovado * (1 + solicitacao.emprestimo.taxaJuros / 100))
+        / solicitacao.emprestimo.parcelas;
+
+    console.log(
+        `Empréstimo de R$ ${valorAprovado.toFixed(2)} aprovado para ${solicitacao.cliente.nome}.
+${solicitacao.emprestimo.parcelas}x de R$ ${parcelaMensal.toFixed(2)} com juros de ${solicitacao.emprestimo.taxaJuros}% ao mês.`
+    );
+}
+
+console.table(solicitacao);
 
 console.log("_______________________________");
 
@@ -182,6 +371,70 @@ console.log("_______________________________");
 // g) Exiba o objeto "embarque" com console.table() ao final.
 
 // → Seu código aqui:
+let embarque = {
+    passageiro: {
+        nome: lerTeclado.question("Nome: "),
+        idade: lerTeclado.questionInt("Idade: "),
+        documento: lerTeclado.question("Documento: ")
+    },
 
+    bagagem: {
+        pesoPoraoKg: lerTeclado.questionFloat("Peso da bagagem de porão: "),
+        temMao: lerTeclado.keyInYN("Possui bagagem de mão? "),
+        pesoMaoKg: 0
+    },
+
+    voo: {
+        classe: lerTeclado.question("Classe (economica/executiva/primeira): "),
+        checkInOnline: lerTeclado.keyInYN("Fez check-in online? ")
+    }
+};
+
+if (embarque.bagagem.temMao) {
+    embarque.bagagem.pesoMaoKg =
+        lerTeclado.questionFloat("Peso da bagagem de mão: ");
+}
+
+let limitePorao = 23;
+let limiteMao = 10;
+
+if (embarque.voo.classe === "executiva") {
+    limitePorao = 32;
+    limiteMao = 15;
+}
+else if (embarque.voo.classe === "primeira") {
+    limitePorao = 50;
+    limiteMao = 18;
+}
+
+if (
+    embarque.passageiro.documento.length < 7 ||
+    embarque.passageiro.documento.length > 11
+) {
+    console.log("Documento inválido. Embarque negado.");
+}
+else {
+    if (
+        embarque.bagagem.pesoPoraoKg > limitePorao &&
+        embarque.voo.classe !== "primeira"
+    ) {
+        console.log("Excesso de bagagem de porão. Pague a taxa de R$ 80,00.");
+    }
+
+    if (embarque.bagagem.pesoMaoKg > limiteMao) {
+        console.log("Bagagem de mão acima do permitido. Despache no balcão.");
+    }
+
+    if (
+        embarque.passageiro.idade < 18 &&
+        !embarque.voo.checkInOnline
+    ) {
+        console.log("Menor de idade sem check-in online. Dirija-se ao balcão.");
+    }
+
+    console.log(`Embarque liberado! Boa viagem, ${embarque.passageiro.nome}!`);
+}
+
+console.table(embarque);
 
 console.log("_______________________________");
