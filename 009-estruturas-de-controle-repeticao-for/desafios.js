@@ -24,6 +24,31 @@
 // d) Armazene cada mês como objeto { mes, saldo } em um array e exiba com console.table().
 
 // → Seu código aqui:
+let saldoInicial = lerTeclado.questionFloat("Saldo inicial: ");
+let taxa = lerTeclado.questionFloat("Taxa de juros (%): ");
+let meses = lerTeclado.questionInt("Quantidade de meses: ");
+
+let saldo = saldoInicial;
+let historico = [];
+
+for (let i = 1; i <= meses; i++) {
+    saldo = saldo * (1 + taxa / 100);
+
+    historico.push({
+        mes: i,
+        saldo: saldo.toFixed(2)
+    });
+
+    console.log(`Mês ${i}: R$ ${saldo.toFixed(2)}`);
+}
+
+let lucro = saldo - saldoInicial;
+
+console.log(`Saldo final: R$ ${saldo.toFixed(2)}`);
+console.log(`Lucro obtido: R$ ${lucro.toFixed(2)}`);
+
+console.table(historico);
+
 
 
 console.log("_______________________________");
@@ -53,6 +78,76 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+let quantidade = lerTeclado.questionInt("Quantidade de alunos: ");
+
+let alunos = [];
+let somaMedias = 0;
+let aprovados = 0;
+let recuperacao = 0;
+let reprovados = 0;
+
+let maiorMedia = -1;
+let menorMedia = 11;
+let nomeMaior = "";
+let nomeMenor = "";
+
+for (let i = 1; i <= quantidade; i++) {
+
+    let nome = lerTeclado.question("Nome: ");
+    let nota1 = lerTeclado.questionFloat("Nota 1: ");
+    let nota2 = lerTeclado.questionFloat("Nota 2: ");
+    let nota3 = lerTeclado.questionFloat("Nota 3: ");
+
+    let media = (nota1 + nota2 + nota3) / 3;
+    let situacao = "";
+
+    if (media >= 7) {
+        situacao = "Aprovado";
+        aprovados++;
+    }
+    else if (media >= 5) {
+        situacao = "Recuperação";
+        recuperacao++;
+    }
+    else {
+        situacao = "Reprovado";
+        reprovados++;
+    }
+
+    alunos.push({
+        nome,
+        notas: [nota1, nota2, nota3],
+        media: media.toFixed(2),
+        situacao
+    });
+
+    somaMedias += media;
+
+    if (media > maiorMedia) {
+        maiorMedia = media;
+        nomeMaior = nome;
+    }
+
+    if (media < menorMedia) {
+        menorMedia = media;
+        nomeMenor = nome;
+    }
+}
+
+for (let aluno of alunos) {
+    console.log(`${aluno.nome} | Média: ${aluno.media} | ${aluno.situacao}`);
+}
+
+console.log(`Média geral: ${(somaMedias / quantidade).toFixed(2)}`);
+console.log(`Maior média: ${nomeMaior}`);
+console.log(`Menor média: ${nomeMenor}`);
+console.log(`Aprovados: ${aprovados}`);
+console.log(`Recuperação: ${recuperacao}`);
+console.log(`Reprovados: ${reprovados}`);
+
+console.table(alunos);
+
+
 
 console.log("_______________________________");
 
@@ -78,6 +173,41 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+let secreto = Math.floor(Math.random() * 100) + 1;
+
+let venceu = false;
+let tentativasUsadas = 0;
+
+for (let i = 1; i <= 7; i++) {
+
+    let palpite = lerTeclado.questionInt("Digite seu palpite: ");
+
+    tentativasUsadas = i;
+
+    if (palpite === secreto) {
+        console.log(`Parabéns! Acertou em ${i} tentativa(s)!`);
+        venceu = true;
+        break;
+    }
+
+    if (palpite > secreto) {
+        console.log("Muito alto!");
+    } else {
+        console.log("Muito baixo!");
+    }
+
+    console.log(`Tentativas restantes: ${7 - i}`);
+}
+
+if (!venceu) {
+    console.log(`Game over! O número era ${secreto}.`);
+}
+
+console.log(`Número secreto: ${secreto}`);
+console.log(`Tentativas usadas: ${tentativasUsadas}`);
+console.log(`Resultado: ${venceu ? "Vitória" : "Derrota"}`);
+
+console.log("_______________________________");
 
 console.log("_______________________________");
 
@@ -103,6 +233,78 @@ console.log("_______________________________");
 // d) Exiba o array de objetos { mes, venda, situacao } com console.table().
 
 // → Seu código aqui:
+
+const vendas = [
+    12500, 9800, 15200, 11000, 13750, 8900,
+    17300, 14600, 10200, 16800, 19500, 22000
+];
+
+const meses = [
+    "Janeiro", "Fevereiro", "Março", "Abril",
+    "Maio", "Junho", "Julho", "Agosto",
+    "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
+let total = 0;
+
+for (let venda of vendas) {
+    total += venda;
+}
+
+let media = total / vendas.length;
+
+let maiorVenda = vendas[0];
+let menorVenda = vendas[0];
+let mesMaior = meses[0];
+let mesMenor = meses[0];
+
+let acimaMedia = 0;
+let abaixoMedia = 0;
+
+let relatorio = [];
+
+for (let i = 0; i < vendas.length; i++) {
+
+    if (vendas[i] > maiorVenda) {
+        maiorVenda = vendas[i];
+        mesMaior = meses[i];
+    }
+
+    if (vendas[i] < menorVenda) {
+        menorVenda = vendas[i];
+        mesMenor = meses[i];
+    }
+
+    let situacao =
+        vendas[i] >= media ? "Acima da média" : "Abaixo da média";
+
+    if (vendas[i] >= media) {
+        acimaMedia++;
+    } else {
+        abaixoMedia++;
+    }
+
+    relatorio.push({
+        mes: meses[i],
+        venda: vendas[i],
+        situacao
+    });
+
+    console.log(
+        `${meses[i]}: R$ ${vendas[i].toFixed(2)} - ${situacao}`
+    );
+}
+
+console.log(`Total anual: R$ ${total.toFixed(2)}`);
+console.log(`Média mensal: R$ ${media.toFixed(2)}`);
+console.log(`Maior venda: ${mesMaior} - R$ ${maiorVenda.toFixed(2)}`);
+console.log(`Menor venda: ${mesMenor} - R$ ${menorVenda.toFixed(2)}`);
+console.log(`Meses acima da média: ${acimaMedia}`);
+console.log(`Meses abaixo da média: ${abaixoMedia}`);
+
+console.table(relatorio);
+
+console.log("_______________________________");
 
 
 console.log("_______________________________");
