@@ -200,6 +200,57 @@ console.log("_______________________________");
 
 // → Seu código aqui:
 
+let pedido = {
+    nome: lerTeclado.question("Nome: "),
+    lanche: "",
+    batata: false,
+    refrigerante: false,
+    total: 0
+};
+
+let opcao = lerTeclado.questionInt(
+    "Lanche (1-X Burguer, 2-X Frango, 3-X Veggie, 4-Combo): "
+);
+
+if (opcao === 1) {
+    pedido.lanche = "X-Burguer";
+    pedido.total = 22;
+}
+else if (opcao === 2) {
+    pedido.lanche = "X-Frango";
+    pedido.total = 20;
+}
+else if (opcao === 3) {
+    pedido.lanche = "X-Veggie";
+    pedido.total = 18;
+}
+else if (opcao === 4) {
+    pedido.lanche = "Combo";
+    pedido.total = 35;
+}
+
+if (opcao !== 4) {
+
+    pedido.batata = lerTeclado.keyInYN("Quer batata frita? ");
+    pedido.refrigerante = lerTeclado.keyInYN("Quer refrigerante? ");
+
+    if (pedido.batata) {
+        pedido.total += 8;
+    }
+
+    if (pedido.refrigerante) {
+        pedido.total += 5;
+    }
+}
+
+console.table(pedido);
+
+console.log(
+    `Pedido de ${pedido.nome}: ${pedido.lanche} + adicionais = R$ ${pedido.total.toFixed(2)}`
+);
+
+
+
 
 console.log("_______________________________");
 
@@ -225,6 +276,31 @@ console.log("_______________________________");
 // c) Exiba o resultado com template literal.
 
 // → Seu código aqui:
+let cor = lerTeclado.question("Cor do semáforo: ").toLowerCase();
+let velocidade = lerTeclado.questionFloat("Velocidade atual: ");
+
+let mensagem = "";
+
+if (cor === "verde" && velocidade <= 60) {
+    mensagem = "Tudo certo. Pode seguir.";
+}
+else if (cor === "verde" && velocidade > 60) {
+    mensagem = "Atenção: acima do limite no sinal verde.";
+}
+else if (cor === "amarelo") {
+    mensagem = "Reduza a velocidade e prepare-se para parar.";
+}
+else if (cor === "vermelho" && velocidade > 0) {
+    mensagem = "PARE! Você avançou o sinal vermelho.";
+}
+else if (cor === "vermelho" && velocidade === 0) {
+    mensagem = "Correto. Aguarde o sinal abrir.";
+}
+else {
+    mensagem = "Cor de semáforo inválida.";
+}
+
+console.log(`${mensagem}`);
 
 
 console.log("_______________________________");
