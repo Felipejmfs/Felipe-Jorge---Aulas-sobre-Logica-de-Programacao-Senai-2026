@@ -207,60 +207,88 @@ Valor final: ${valorFinalCompra
 console.log("_______________________________");
 
 
-// ------------------------------------------------------------
+/// ------------------------------------------------------------
 // DESAFIO 5 – Boletim escolar
 // ------------------------------------------------------------
+
 // a) Peça ao usuário 4 notas.
-//
+
+let nota1 = lerTeclado.questionFloat("Digite a primeira nota: ");
+let nota2 = lerTeclado.questionFloat("Digite a segunda nota: ");
+let nota3 = lerTeclado.questionFloat("Digite a terceira nota: ");
+let nota4 = lerTeclado.questionFloat("Digite a quarta nota: ");
+
 // b) Crie um objeto "boletim" contendo:
 //    notas (array com as 4 notas)
-//
+
+let boletim = {
+    notas: [nota1, nota2, nota3, nota4]
+};
+
 // c) Calcule:
 //    média das notas
-//
+
+let media = (nota1 + nota2 + nota3 + nota4) / 4;
+
 // d) Calcule também:
 //    pontosFaltantesPara10
-//
-// Fórmula:
-// pontosFaltantes = 10 - media
-//
+
+let pontosFaltantesPara10 = 10 - media;
+
 // e) Exiba:
-//
-// "Notas: X"
-// "Média: X"
-// "Faltam X pontos para média 10."
 
-// → Seu código aqui:
-
+console.log(`Notas: ${boletim.notas}
+Média: ${media}
+Faltam ${pontosFaltantesPara10} pontos para média 10.`);
 
 console.log("_______________________________");
-
 
 // ------------------------------------------------------------
 // DESAFIO 6 – Restaurante (cálculo de conta)
 // ------------------------------------------------------------
+
 // a) Peça ao usuário o preço de:
 //    entrada
 //    prato principal
 //    sobremesa
 //    bebida
-//
+
+let entrada = lerTeclado.questionFloat("Preço da entrada: ");
+let pratoPrincipal = lerTeclado.questionFloat("Preço do prato principal: ");
+let sobremesa = lerTeclado.questionFloat("Preço da sobremesa: ");
+let bebida = lerTeclado.questionFloat("Preço da bebida: ");
+
 // b) Crie um objeto "pedido".
-//
+
+let pedido = {
+    entrada: entrada,
+    pratoPrincipal: pratoPrincipal,
+    sobremesa: sobremesa,
+    bebida: bebida
+};
+
 // c) Crie um array "itens".
-//
+
+let itens = [entrada, pratoPrincipal, sobremesa, bebida];
+
 // d) Calcule:
 //    subtotal
-//
+
+let subtotal = entrada + pratoPrincipal + sobremesa + bebida;
+
 // e) Calcule taxa de serviço de 10%
-//
+
+let taxaServico = subtotal * 0.10;
+
 // f) Calcule valor total.
-//
+
+let total = subtotal + taxaServico;
+
 // g) Exiba:
-//
-// "Subtotal: X"
-// "Taxa de serviço: X"
-// "Total a pagar: X"
+
+console.log(`Subtotal: ${subtotal}
+Taxa de serviço: ${taxaServico}
+Total a pagar: ${total}`);
 
 // → Seu código aqui:
 
@@ -271,25 +299,39 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // DESAFIO 7 – Análise de números
 // ------------------------------------------------------------
+
 // a) Peça 5 números ao usuário.
-//
+
+let numero1 = lerTeclado.questionFloat("Digite o primeiro número: ");
+let numero2 = lerTeclado.questionFloat("Digite o segundo número: ");
+let numero3 = lerTeclado.questionFloat("Digite o terceiro número: ");
+let numero4 = lerTeclado.questionFloat("Digite o quarto número: ");
+let numero5 = lerTeclado.questionFloat("Digite o quinto número: ");
+
 // b) Crie um objeto "analise".
-//
+
+let analise = {
+    numeros: [numero1, numero2, numero3, numero4, numero5]
+};
+
 // c) Crie um array "numeros".
-//
+
+let numeros = [numero1, numero2, numero3, numero4, numero5];
+
 // d) Calcule:
 //    soma de todos
 //    média
 //    produto (multiplicação de todos)
-//
+
+let soma = numero1 + numero2 + numero3 + numero4 + numero5;
+let media = soma / 5;
+let produto = numero1 * numero2 * numero3 * numero4 * numero5;
+
 // e) Exiba:
-//
-// "Soma: X"
-// "Média: X"
-// "Produto: X"
 
-// → Seu código aqui:
-
+console.log(`Soma: ${soma}
+Média: ${media}
+Produto: ${produto}`);
 
 console.log("_______________________________");
 
@@ -297,35 +339,45 @@ console.log("_______________________________");
 // ------------------------------------------------------------
 // DESAFIO 8 – Perfil financeiro
 // ------------------------------------------------------------
+
 // a) Peça ao usuário:
 //    salário
 //    renda extra
 //    gastos fixos
 //    gastos variáveis
-//
+
+let salario = lerTeclado.questionFloat("Digite o salário: ");
+let rendaExtra = lerTeclado.questionFloat("Digite a renda extra: ");
+let gastosFixos = lerTeclado.questionFloat("Digite os gastos fixos: ");
+let gastosVariaveis = lerTeclado.questionFloat("Digite os gastos variáveis: ");
+
 // b) Crie um objeto "financeiro".
-//
+
+let financeiro = {
+    receitas: [salario, rendaExtra],
+    despesas: [gastosFixos, gastosVariaveis]
+};
+
 // c) Crie arrays:
 //    receitas
 //    despesas
-//
+
+let receitas = [salario, rendaExtra];
+let despesas = [gastosFixos, gastosVariaveis];
+
 // d) Calcule:
 //    rendaTotal
 //    gastoTotal
 //    saldoFinal
-//
-// Fórmulas:
-// rendaTotal = salario + rendaExtra
-// gastoTotal = gastosFixos + gastosVariaveis
-// saldoFinal = rendaTotal - gastoTotal
-//
+
+let rendaTotal = salario + rendaExtra;
+let gastoTotal = gastosFixos + gastosVariaveis;
+let saldoFinal = rendaTotal - gastoTotal;
+
 // e) Exiba:
-//
-// "Renda total: X"
-// "Gastos totais: X"
-// "Saldo final: X"
 
-// → Seu código aqui:
-
+console.log(`Renda total: ${rendaTotal}
+Gastos totais: ${gastoTotal}
+Saldo final: ${saldoFinal}`);
 
 console.log("_______________________________");
