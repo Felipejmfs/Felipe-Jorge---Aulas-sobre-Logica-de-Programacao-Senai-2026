@@ -3,8 +3,8 @@ const lT = require("readline-sync")
 let listaDeTarefas = []
 let acao = null
 let tarefaIndice = null
-let titulo = null
-let descricao = null
+let titulo = ""
+let descricao = ""
 let resetar = false
 
 function menuInicial() {
@@ -25,27 +25,41 @@ function menuInicial() {
     } while (acao < 1 || acao > 7);
 }
 
+function verificaTituloVazio() {
+    while (titulo.length <= 0) {
+        console.log("Titulo invalido, tente novamente.")
+        titulo = lT.question("Digite um titulo valido: ")
+    }
+}
+
+function verfificaDescricaoVazia() {
+    while (descricao.length <= 0) {
+        console.log("Descricao invalida, tente novamente.")
+        descricao = lT.question("Digite uma descricao valida: ")
+    }
+}
+function verificaTituloJaExistente() {
+    while (
+        listaDeTarefas.find(
+            replicaTitulo => replicaTitulo.titulo.toLowerCase() === titulo.toLowerCase())
+    ) {
+        console.log("Ja existe uma tarefa com esse titulo");
+        titulo = lT.question("Digite um titulo diferente: ")
+    }
+}
+
 function adicionarTarefa() {
     do {
         titulo = lT.question("Digite o titulo da tarefa: ")
-        if (titulo.length <= 0) {
-            console.log("Titulo invalido, tente novamente.")
-            continue
-        }
-        for (let i = 0; i < listaDeTarefas.length; i++) {
-            if (titulo.toLowerCase == listaDeTarefas[i].titulo.toLowerCase) {
-                console.log("Ja existe uma tarefa com esse nome.");
-                resetar = true
-                titulo = -1
-            }
-        }
-        if (resetar) continue
+
+        verificaTituloVazio()
+
+        verificaTituloJaExistente()
 
         descricao = lT.question("Escreva uma descricao sobre a tarefa: ")
-        if (descricao.length < 0) {
-            console.log("Descricao invalida, tente novamente.");
-            continue
-        }
+
+        verfificaDescricaoVazia()
+
         listaDeTarefas.push(
             {
                 titulo: titulo,
@@ -55,7 +69,6 @@ function adicionarTarefa() {
         console.log("Tarefa adicionada com sucesso!");
     } while (titulo.length < 0 || descricao.length < 0);
     console.log(listaDeTarefas);
-
 }
 
 function visualizarListaDeTarefas() {
@@ -67,17 +80,20 @@ function visualizarListaDeTarefas() {
         console.log(`Tarefa ${i + 1} - Titulo: ${listaDeTarefas[i].titulo}`)
     }
     console.log("Todas tarefas foram exibidas.");
+}
 
+function pedirIndice() {
+    let indiceDaTarefa = lT.questionInt("Digite o indice da tarefa que deseja: ")
+    while (indiceDaTarefa > listaDeTarefas.length || listaDeindiceDaTarefaTarefas <= 0) {
+        console.log("Indice invalido.");
+        indiceDaTarefa = lT.questionInt("Digite um indice valido: ")
+        indiceDaTarefa--
+    }
 }
 
 function visualizarTarefa() {
     do {
-        let indiceDaTarefa = lT.questionInt("Digite o indice do item que deseja exibir: ")
-        indiceDaTarefa--
-        if (indiceDaTarefa > listaDeTarefas.length || listaDeTarefas < 0) {
-            console.log("Indice invalido.")
-            continue
-        }
+        pedirIndice(indiceDaTarefa)
         console.log("===================");
         console.log("TITULO:");
         console.log(listaDeTarefas[indiceDaTarefa].titulo)
@@ -88,6 +104,18 @@ function visualizarTarefa() {
         break
     } while (true);
     return
+}
+
+function editarTarefa() {
+    pedirIndice(indiceDaTarefa)
+    do {
+        
+        let editarTituloOuDescricao = lT.questionInt(`
+        1 - Editar titulo
+        2 - Editar descricao
+        Digite a opcao que deseja: 
+        `)
+    } while (editarTituloOuDescricao < 1 || editarTituloOuDescricao > 2);
 }
 function processarOpcao() {
     do {
