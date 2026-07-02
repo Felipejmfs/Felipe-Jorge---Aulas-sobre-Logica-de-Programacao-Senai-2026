@@ -6,6 +6,8 @@ let tarefaIndice = null
 let titulo = ""
 let descricao = ""
 let resetar = false
+let indiceDaTarefa = null
+let tituloNovoQueQuerEditar = null
 
 function menuInicial() {
     console.log("===========================")
@@ -25,12 +27,17 @@ function menuInicial() {
     } while (acao < 1 || acao > 7);
 }
 
-function verificaTituloVazio() {
-    while (titulo.length <= 0) {
-        console.log("Titulo invalido, tente novamente.")
+function validaTitulo() {
+    while (titulo.length <= 0 ||
+        listaDeTarefas.find(
+            replicaTitulo => replicaTitulo.titulo.toLowerCase() === titulo.toLowerCase())
+    ) {
+        console.log("Titulo invalido ou ja exite titulo com esse nome, tente novamente.")
         titulo = lT.question("Digite um titulo valido: ")
     }
 }
+
+
 
 function verfificaDescricaoVazia() {
     while (descricao.length <= 0) {
@@ -38,23 +45,12 @@ function verfificaDescricaoVazia() {
         descricao = lT.question("Digite uma descricao valida: ")
     }
 }
-function verificaTituloJaExistente() {
-    while (
-        listaDeTarefas.find(
-            replicaTitulo => replicaTitulo.titulo.toLowerCase() === titulo.toLowerCase())
-    ) {
-        console.log("Ja existe uma tarefa com esse titulo");
-        titulo = lT.question("Digite um titulo diferente: ")
-    }
-}
 
 function adicionarTarefa() {
     do {
         titulo = lT.question("Digite o titulo da tarefa: ")
 
-        verificaTituloVazio()
-
-        verificaTituloJaExistente()
+        validaTitulo()
 
         descricao = lT.question("Escreva uma descricao sobre a tarefa: ")
 
@@ -83,39 +79,65 @@ function visualizarListaDeTarefas() {
 }
 
 function pedirIndice() {
-    let indiceDaTarefa = lT.questionInt("Digite o indice da tarefa que deseja: ")
-    while (indiceDaTarefa > listaDeTarefas.length || listaDeindiceDaTarefaTarefas <= 0) {
+    indiceDaTarefa = lT.questionInt("Digite o indice da tarefa que deseja: ")
+    while (indiceDaTarefa > listaDeTarefas.length || indiceDaTarefa <= 0) {
         console.log("Indice invalido.");
         indiceDaTarefa = lT.questionInt("Digite um indice valido: ")
-        indiceDaTarefa--
     }
+    return indiceDaTarefa--
 }
 
 function visualizarTarefa() {
-    do {
-        pedirIndice(indiceDaTarefa)
-        console.log("===================");
-        console.log("TITULO:");
-        console.log(listaDeTarefas[indiceDaTarefa].titulo)
-        console.log("===================");
-        console.log("DESCRICAO");
-        console.log(listaDeTarefas[indiceDaTarefa].descricao)
-        console.log("===================");
-        break
-    } while (true);
-    return
+    pedirIndice()
+    console.log("===================");
+    console.log("TITULO:");
+    console.log(listaDeTarefas[indiceDaTarefa].titulo)
+    console.log("===================");
+    console.log("DESCRICAO");
+    console.log(listaDeTarefas[indiceDaTarefa].descricao)
+    console.log("===================");
+}
+
+function validaTituloDaEdicao() {
+    while (tituloNovoQueQuerEditar.length <= 0 ||
+        listaDeTarefas.find(
+            replicaTitulo => replicaTitulo.titulo.toLowerCase() === tituloNovoQueQuerEditar.toLowerCase())
+    ) {
+        console.log("Titulo invalido ou ja exite titulo com esse nome, tente novamente.")
+        tituloNovoQueQuerEditar = lT.question("Digite um titulo valido: ")
+    }
+    listaDeTarefas[indiceDaTarefa].titulo = tituloNovoQueQuerEditar
 }
 
 function editarTarefa() {
-    pedirIndice(indiceDaTarefa)
-    do {
-        
-        let editarTituloOuDescricao = lT.questionInt(`
-        1 - Editar titulo
-        2 - Editar descricao
-        Digite a opcao que deseja: 
-        `)
-    } while (editarTituloOuDescricao < 1 || editarTituloOuDescricao > 2);
+
+    tituloNovoQueQuerEditar = null
+
+    pedirIndice()
+    
+    let editarTituloOuDescricao = lT.questionInt(`
+    1 - Editar titulo
+    2 - Editar descricao
+    Digite a opcao que deseja: `)
+
+    while (editarTituloOuDescricao < 1 || editarTituloOuDescricao > 2) {
+        console.log("Opcao invalida!");
+        editarTituloOuDescricao = lT.questionInt("Digite uma opcao valida: ")
+    }
+
+    switch (editarTituloOuDescricao) {
+        case 1:
+            tituloNovoQueQuerEditar = lT.question("Digite o novo titulo: ")
+            validaTituloDaEdicao()
+            console.log("Titulo alterado com sucesso.");
+            break;
+        case 2:
+
+            break;
+
+        default:
+            break;
+    }
 }
 function processarOpcao() {
     do {
@@ -149,4 +171,7 @@ function processarOpcao() {
         }
     } while (true);
 }
+
+
+
 processarOpcao()
