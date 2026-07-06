@@ -172,6 +172,6 @@ function processarOpcao() {
     } while (true);
 }
 
-
+console.log("teste")
 
 processarOpcao()
