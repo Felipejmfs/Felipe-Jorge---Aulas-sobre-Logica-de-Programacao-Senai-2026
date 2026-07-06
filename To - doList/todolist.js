@@ -2,11 +2,8 @@ const lT = require("readline-sync")
 
 let listaDeTarefas = []
 let acao = null
-let tarefaIndice = null
 let titulo = ""
 let descricao = ""
-let resetar = false
-let indiceDaTarefa = null
 let tituloNovoQueQuerEditar = null
 let sistemaRodando = true
 
@@ -74,7 +71,9 @@ function visualizarListaDeTarefas() {
         return
     }
     for (let i = 0; i < listaDeTarefas.length; i++) {
-        console.log(`Tarefa ${i + 1} - Titulo: ${listaDeTarefas[i].titulo}`)
+        console.log("┌────────────────────────────────────────────┐")
+        console.log(`│ Tarefa ${i + 1} - Titulo: ${listaDeTarefas[i].titulo}`)
+        console.log("└────────────────────────────────────────────┘");
     }
     console.log("Todas tarefas foram exibidas.");
 }
@@ -90,13 +89,12 @@ function pedirIndice() {
 
 function visualizarTarefa() {
     let indice = pedirIndice()
-    console.log("===================");
-    console.log("TITULO:");
-    console.log(listaDeTarefas[indice].titulo)
-    console.log("===================");
-    console.log("DESCRICAO");
-    console.log(listaDeTarefas[indice].descricao)
-    console.log("===================");
+    console.log("┌─────────────────────────────────────┐");
+    console.log(`│ Título: ${listaDeTarefas[indice].titulo}`);
+    console.log("├─────────────────────────────────────┤");
+    console.log("│ Descrição:");
+    console.log(`│ ${listaDeTarefas[indice].descricao}`);
+    console.log("└─────────────────────────────────────┘");
 }
 
 function validaTituloDaEdicao(indice) {
@@ -115,7 +113,7 @@ function editarTarefa() {
     tituloNovoQueQuerEditar = null
 
     let indice = pedirIndice()
-    
+
     let editarTituloOuDescricao = lT.questionInt(`
     1 - Editar titulo
     2 - Editar descricao
@@ -132,20 +130,15 @@ function editarTarefa() {
             validaTituloDaEdicao(indice)
             console.log("Titulo alterado com sucesso.");
             break;
-
         case 2:
             descricao = lT.question("Digite a nova descricao: ")
-
             while (descricao.length <= 0) {
                 console.log("Descricao invalida, tente novamente.");
                 descricao = lT.question("Digite uma descricao valida: ")
             }
-
             listaDeTarefas[indice].descricao = descricao
-
             console.log("Descricao alterada com sucesso.");
             break;
-
         default:
             break;
     }
@@ -172,10 +165,10 @@ function filtrarTarefas() {
     }
 
     let opcao = lT.questionInt(`
-1 - Pesquisar por titulo
-2 - Pesquisar por descricao
-Escolha uma opcao: `);
-    
+    1 - Pesquisar por titulo
+    2 - Pesquisar por descricao
+    Escolha uma opcao: `);
+
     while (opcao < 1 || opcao > 2) {
         console.log("Opcao invalida.");
         opcao = lT.questionInt("Digite uma opcao valida: ");
@@ -191,7 +184,6 @@ Escolha uma opcao: `);
                 }
             }
             break;
-
         case 2:
             for (let i = 0; i < listaDeTarefas.length; i++) {
                 if (listaDeTarefas[i].descricao.toLowerCase().includes(pesquisa.toLowerCase())) {
@@ -212,35 +204,35 @@ function encerrar() {
 }
 
 function processarOpcao() {
-        menuInicial()
+    menuInicial()
 
-        switch (acao) {
-            case 1:
-                adicionarTarefa();
-                break;
-            case 2:
-                visualizarListaDeTarefas();
-                break;
-            case 3:
-                visualizarTarefa();
-                break;
-            case 4:
-                editarTarefa();
-                break;
-            case 5:
-                excluirTarefa();
-                break;
-            case 6:
-                filtrarTarefas();
-                break;
-            case 7:
-                encerrar();
-                break;
-            default:
-                break;
-        }
+    switch (acao) {
+        case 1:
+            adicionarTarefa();
+            break;
+        case 2:
+            visualizarListaDeTarefas();
+            break;
+        case 3:
+            visualizarTarefa();
+            break;
+        case 4:
+            editarTarefa();
+            break;
+        case 5:
+            excluirTarefa();
+            break;
+        case 6:
+            filtrarTarefas();
+            break;
+        case 7:
+            encerrar();
+            break;
+        default:
+            break;
+    }
 }
 
-while(sistemaRodando) {
+while (sistemaRodando) {
     processarOpcao()
 }
