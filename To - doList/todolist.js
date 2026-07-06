@@ -8,6 +8,7 @@ let descricao = ""
 let resetar = false
 let indiceDaTarefa = null
 let tituloNovoQueQuerEditar = null
+let sistemaRodando = true
 
 function menuInicial() {
     console.log("===========================")
@@ -84,7 +85,7 @@ function pedirIndice() {
         console.log("Indice invalido.");
         indiceDaTarefa = lT.questionInt("Digite um indice valido: ")
     }
-    return indiceDaTarefa--
+    indiceDaTarefa--
 }
 
 function visualizarTarefa() {
@@ -131,17 +132,86 @@ function editarTarefa() {
             validaTituloDaEdicao()
             console.log("Titulo alterado com sucesso.");
             break;
-        case 2:
 
+        case 2:
+            descricao = lT.question("Digite a nova descricao: ")
+
+            while (descricao.length <= 0) {
+                console.log("Descricao invalida, tente novamente.");
+                descricao = lT.question("Digite uma descricao valida: ")
+            }
+
+            listaDeTarefas[indiceDaTarefa].descricao = descricao
+
+            console.log("Descricao alterada com sucesso.");
             break;
 
         default:
             break;
     }
 }
-function processarOpcao() {
-    do {
 
+function excluirTarefa() {
+    if (listaDeTarefas.length < 1) {
+        console.log("Nao ha tarefas para excluir.");
+        return;
+    }
+    console.log("Excluindo tarefas")
+    visualizarListaDeTarefas();
+    pedirIndice();
+
+    listaDeTarefas.splice(indiceDaTarefa, 1);
+
+    console.log("Tarefa excluida com sucesso!");
+}
+
+function filtrarTarefas() {
+    if (listaDeTarefas.length < 1) {
+        console.log("Nao ha tarefas cadastradas.");
+        return;
+    }
+
+    let opcao = lT.questionInt(`
+1 - Pesquisar por titulo
+2 - Pesquisar por descricao
+Escolha uma opcao: `);
+    
+    while (opcao < 1 || opcao > 2) {
+        console.log("Opcao invalida.");
+        opcao = lT.questionInt("Digite uma opcao valida: ");
+    }
+    let pesquisa = lT.question("Digite o que deseja pesquisar: ");
+    let encontrou = false;
+    switch (opcao) {
+        case 1:
+            for (let i = 0; i < listaDeTarefas.length; i++) {
+                if (listaDeTarefas[i].titulo.toLowerCase().includes(pesquisa.toLowerCase())) {
+                    console.log(`Tarefa ${i + 1} - ${listaDeTarefas[i].titulo}`);
+                    encontrou = true;
+                }
+            }
+            break;
+
+        case 2:
+            for (let i = 0; i < listaDeTarefas.length; i++) {
+                if (listaDeTarefas[i].descricao.toLowerCase().includes(pesquisa.toLowerCase())) {
+                    console.log(`Indice: ${i + 1} | Titulo: ${listaDeTarefas[i].titulo}`);
+                    encontrou = true;
+                }
+            }
+            break;
+    }
+    if (!encontrou) {
+        console.log("Nenhuma tarefa encontrada.");
+    }
+}
+
+function encerrar() {
+    console.log("Encerrando o sistema... até logo!");
+    sistemaRodando = false;
+}
+
+function processarOpcao() {
         menuInicial()
 
         switch (acao) {
@@ -169,9 +239,8 @@ function processarOpcao() {
             default:
                 break;
         }
-    } while (true);
 }
 
-console.log("teste")
-
-processarOpcao()
+while(sistemaRodando) {
+    processarOpcao()
+}
